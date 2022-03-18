@@ -1,4 +1,4 @@
-[
+export default [
   {
     id: 0,
     title: "Sinrim station 30 meters away",

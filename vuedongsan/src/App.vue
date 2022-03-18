@@ -1,43 +1,45 @@
 <template>
-  <div class="black_bg" v-if="modalOpen === true">
-    <div class="white_bg">
-      <h4>상세페이지</h4>
-      <p>내용</p>
-      <button @click="modalOpen = false">닫기</button>
-    </div>
-  </div>
+  <Modal
+    :oneRoom="oneRoom"
+    :clickModal="clickModal"
+    :modalOpen="modalOpen"
+  ></Modal>
 
   <div class="menu">
     <a v-for="(test, i) in menus" :key="i" href="#">{{ test }}</a>
   </div>
 
-  <div v-for="(item, idx) in products" :key="idx">
-    <img class="room-img" src="./assets/room0.jpg" alt="study" />
-    <h4 @click="modalOpen = true" :style="style">{{ products[idx] }}</h4>
-    <p>50 만원</p>
-    <button @click="police[idx]++">허위매물신고</button>
-    <span>신고 수 : {{ police[idx] }}</span>
-  </div>
+  <Discount></Discount>
+
+  <Card
+    v-for="(item, index) in oneRoom"
+    :key="index"
+    :oneRoom="oneRoom[index]"
+  ></Card>
 </template>
 
 <script>
+import data from "./assets/oneroom";
+import Discount from "./components/Discount.vue";
+import Modal from "./components/Modal.vue";
+import Card from "./components/Card.vue";
+
 export default {
   name: "App",
   data() {
     return {
+      clickModal: 0,
+      oneRoom: data,
       menus: ["Home", "Shop", "About", "Contact"],
-      products: ["역삼동원룸", "천호동원룸", "마포구원룸"],
-      style: "color : blue",
-      police: [0, 0, 0],
       modalOpen: false,
     };
   },
-  methods: {
-    increase() {
-      console.log(this);
-    },
+  methods: {},
+  components: {
+    Discount,
+    Modal,
+    Card,
   },
-  components: {},
 };
 </script>
 
@@ -82,5 +84,11 @@ div {
 .room-img {
   width: 100%;
   margin-top: 40px;
+}
+.discount {
+  background: #eee;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
 }
 </style>
