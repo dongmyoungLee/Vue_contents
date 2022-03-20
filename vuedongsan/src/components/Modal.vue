@@ -33,7 +33,7 @@ export default {
     clickModal: Number,
     modalOpen: Boolean,
   },
-  updated() {
+  beforeupdated() {
     if (this.month === 2) {
       alert();
     }
