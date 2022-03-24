@@ -8,7 +8,8 @@
     </ul>
   </div>
 
-  <Container :instaData="instaData"></Container>
+  <Container :instaData="instaData" :step="step"></Container>
+  <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -21,16 +22,29 @@
 <script>
 import Container from "./components/Container.vue";
 import data from "./assets/data.js";
+import axios from "axios";
 
 export default {
   name: "App",
   data() {
     return {
+      step: 0,
       instaData: data,
+      moreBtn: 0,
     };
   },
   components: {
     Container,
+  },
+  methods: {
+    more() {
+      axios
+        .get(`https://codingapple1.github.io/vue/more${this.moreBtn}.json`)
+        .then((result) => {
+          this.instaData.push(result.data);
+          this.moreBtn++;
+        });
+    },
   },
 };
 </script>
