@@ -10,21 +10,27 @@
 
     <!-- 필터선택페이지 -->
     <div v-if="step === 1">
-      <div class="upload-image"></div>
+      <div class="upload-image" :style="`background-image : url(${img})`"></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox
+          :img="img"
+          v-for="(item, index) in filterData"
+          :key="index"
+          :class="item"
+        ></FilterBox>
       </div>
     </div>
 
     <!-- 글작성페이지 -->
     <div v-if="step === 2">
-      <div class="upload-image"></div>
+      <div class="upload-image" :style="`background-image : url(${img})`"></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea
+          class="write-box"
+          @input="$emit('write', $event.target.value)"
+        >
+write!</textarea
+        >
       </div>
     </div>
   </div>
@@ -32,15 +38,50 @@
 
 <script>
 import Post from "./Post.vue";
+import FilterBox from "./FilterBox.vue";
 
 export default {
   name: "ContainerBox",
+  data() {
+    return {
+      filterData: [
+        "aden",
+        "_1977",
+        "brannan",
+        "brooklyn",
+        "clarendon",
+        "earlybird",
+        "gingham",
+        "hudson",
+        "inkwell",
+        "kelvin",
+        "lark",
+        "lofi",
+        "maven",
+        "mayfair",
+        "moon",
+        "nashville",
+        "perpetua",
+        "reyes",
+        "rise",
+        "slumber",
+        "stinson",
+        "toaster",
+        "valencia",
+        "walden",
+        "willow",
+        "xpro2",
+      ],
+    };
+  },
   components: {
     Post,
+    FilterBox,
   },
   props: {
     instaData: Array,
     step: Number,
+    img: String,
   },
 };
 </script>
