@@ -8,6 +8,7 @@
       <span class="profile-name">{{ instaData.name }}</span>
     </div>
     <div
+      :class="instaData.filter"
       class="post-body"
       :style="{ backgroundImage: `url(${instaData.postImage})` }"
     ></div>

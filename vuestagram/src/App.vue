@@ -13,6 +13,7 @@
     :instaData="instaData"
     :step="step"
     :img="img"
+    :filterModi="filterModi"
     @write="writePost = $event"
   ></Container>
   <button @click="more">더보기</button>
@@ -45,6 +46,7 @@ export default {
       moreBtn: 0,
       img: "",
       writePost: "",
+      filterModi: "",
     };
   },
   components: {
@@ -74,11 +76,16 @@ export default {
         date: "May 15",
         liked: false,
         content: this.writePost,
-        filter: "perpetua",
+        filter: this.filterModi,
       };
       this.instaData.unshift(myPost);
       this.step = 0;
     },
+  },
+  mounted() {
+    this.emitter.on("filterFire", (result) => {
+      this.filterModi = result;
+    });
   },
 };
 </script>
