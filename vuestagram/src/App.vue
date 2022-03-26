@@ -8,7 +8,7 @@
       <li v-if="step === 2" @click="publish">발행</li>
     </ul>
   </div>
-
+  <p>{{ myname }}</p>
   <Container
     :instaData="instaData"
     :step="step"
@@ -16,7 +16,6 @@
     :filterModi="filterModi"
     @write="writePost = $event"
   ></Container>
-  <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -36,6 +35,7 @@
 import Container from "./components/Container.vue";
 import data from "./assets/data.js";
 import axios from "axios";
+import { mapMutations, mapState } from "vuex";
 
 export default {
   name: "App",
@@ -47,12 +47,18 @@ export default {
       img: "",
       writePost: "",
       filterModi: "",
+      counter: 0,
     };
   },
   components: {
     Container,
   },
+  computed: {
+    ...mapState(["name", "age", "likes"]),
+    ...mapState({ myname: "name" }),
+  },
   methods: {
+    ...mapMutations(["nameChange", "plus"]),
     more() {
       axios
         .get(`https://codingapple1.github.io/vue/more${this.moreBtn}.json`)
