@@ -1,14 +1,14 @@
 <template>
   <div class="header">
     <ul class="header-button-left">
-      <li>Cancel</li>
+      <li @click="step = 0">Cancel</li>
     </ul>
     <ul class="header-button-right">
       <li v-if="step === 1" @click="step = 2">Next</li>
       <li v-if="step === 2" @click="publish">발행</li>
     </ul>
   </div>
-  <p>{{ myname }}</p>
+
   <Container
     :instaData="instaData"
     :step="step"
@@ -41,7 +41,7 @@ export default {
   name: "App",
   data() {
     return {
-      step: 0,
+      step: 3,
       instaData: data,
       moreBtn: 0,
       img: "",

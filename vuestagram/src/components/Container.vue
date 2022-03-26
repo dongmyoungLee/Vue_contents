@@ -45,12 +45,18 @@ write!</textarea
         >
       </div>
     </div>
+
+    <!-- myPage -->
+    <div v-if="step === 3">
+      <Mypage :one="1" />
+    </div>
   </div>
 </template>
 
 <script>
 import Post from "./Post.vue";
 import FilterBox from "./FilterBox.vue";
+import Mypage from "./Mypage.vue";
 
 export default {
   name: "ContainerBox",
@@ -89,6 +95,7 @@ export default {
   components: {
     Post,
     FilterBox,
+    Mypage,
   },
   props: {
     instaData: Array,
